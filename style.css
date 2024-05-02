@@ -1,0 +1,104 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background-color: #000;
+    color: #fff;
+}
+
+canvas {
+    border: 2px solid #fff;
+    margin-bottom: 20px;
+}
+
+.menu {
+    padding : 5px;
+    text-align: center;
+    margin-top: 20px;
+    
+}
+
+.save-input {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #555;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #555;
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #777;
+}
+
+select {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #555;
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 16px;
+}
+
+option {
+    background-color: #555;
+    color: #fff;
+}
+
+option:hover {
+    background-color: #777;
+}
+
+.theme-switcher {
+    margin-top: 20px;
+}
+
+.theme-switcher label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.theme-switcher input[type="radio"] {
+    display: none;
+}
+
+.theme-switcher input[type="radio"] + label {
+    background-color: #555;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.theme-switcher input[type="radio"]:checked + label {
+    background-color: #777;
+}
+
+.dark-theme {
+    background-color: #000;
+    color: #fff;
+}
+
+.light-theme {
+    background-color: #fff;
+    color: #000;
+}
+
+.light-theme canvas {
+    border-color: #000;
+}

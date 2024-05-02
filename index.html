@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="gameArea">
+        <canvas id="gameCanvas" width="600" height="400"></canvas>
+        <div class="speed-buttons">
+            <button onclick="changeSpeed(250)">Speed 1</button>
+            <button onclick="changeSpeed(150)">Speed 2</button>
+            <button onclick="changeSpeed(100)">Speed 3</button>
+        </div>
+        <div class="color-buttons">
+            <button onclick="changeSnakeColor('#000')">Black</button>
+            <button onclick="changeSnakeColor('#00f')">Blue</button>
+            <button onclick="changeSnakeColor('#f00')">Red</button>
+            <button onclick="changeSnakeColor('#0f0')">Green</button>
+        </div>
+        <div class="score" style="text-align: center; font-weight: bold;">Score: 0</div>
+        <div class="best-score" style="text-align: center; font-weight: bold;">Best Score: 0</div>
+
+        </div>
+        <div class="theme-switcher">
+            <label>
+                <input type="radio" name="theme" value="dark" checked>
+                Dark
+            </label>
+            <label>
+                <input type="radio" name="theme" value="light">
+                Light
+            </label>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
