@@ -8,7 +8,8 @@ const defaultSpeed = 250;
 const minSpeed = 100;
 const defaultSnakeColor = "#00ff7f";
 const obstacleColor = "#8a2be2";
-const enemyColor = "#ff4500";
+const enemyColor = "#ff0000";
+const chaserColor = "#0066ff";
 const savePrefix = "snakeGameSave_";
 const autoSaveKey = "snakeGameAutoSave";
 const bestScoreKey = "snakeGameBestScore";
@@ -232,6 +233,7 @@ function Enemy(data = {}) {
     this.ySpeed = data.ySpeed ?? 0;
     this.color = data.color || enemyColor;
     this.growSegments = data.growSegments || 0;
+    this.isChaser = data.isChaser || false;
 }
 
 Enemy.prototype.pickLocation = function (exclude = []) {
@@ -240,7 +242,20 @@ Enemy.prototype.pickLocation = function (exclude = []) {
 };
 
 Enemy.prototype.update = function () {
-    if (Math.random() < enemyMoveChange) {
+    if (this.isChaser) {
+        const target = gameState.snake.body[gameState.snake.body.length - 1];
+        const head = this.body[this.body.length - 1];
+        const dx = target.x - head.x;
+        const dy = target.y - head.y;
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+            this.xSpeed = dx > 0 ? scale : -scale;
+            this.ySpeed = 0;
+        } else {
+            this.xSpeed = 0;
+            this.ySpeed = dy > 0 ? scale : -scale;
+        }
+    } else if (Math.random() < enemyMoveChange) {
         const directions = [
             { xSpeed: scale, ySpeed: 0 },
             { xSpeed: -scale, ySpeed: 0 },
@@ -309,6 +324,9 @@ function startGame(loadData = null) {
         });
         gameState.obstacles = (loadData.obstacles || []).map(obsData => new Obstacle(obsData));
         gameState.enemies = (loadData.enemies || []).map(enemyData => new Enemy(enemyData));
+        if (gameState.level >= 5 && !gameState.enemies.some(enemy => enemy.isChaser)) {
+            gameState.enemies.push(new Enemy({ isChaser: true, color: chaserColor, exclude: collectBlockedPositions() }));
+        }
         gameState.fruit = new Fruit({
             type: loadData.fruit?.type,
             x: loadData.fruit?.x,
@@ -427,6 +445,9 @@ function levelUp() {
     gameState.obstacles.push(new Obstacle({ exclude: collectBlockedPositions() }));
     if (gameState.level % 2 === 0) {
         gameState.enemies.forEach(enemy => enemy.grow(1));
+    }
+    if (gameState.level === 5 && !gameState.enemies.some(enemy => enemy.isChaser)) {
+        gameState.enemies.push(new Enemy({ isChaser: true, color: chaserColor, exclude: collectBlockedPositions() }));
     }
     startLoop();
     setTimeout(() => {
