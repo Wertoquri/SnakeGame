@@ -3,66 +3,75 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     background-color: #000;
     color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+#gameArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 canvas {
-    border: 2px solid #fff;
-    margin-bottom: 20px;
+    border: 3px solid #fff;
+    border-radius: 8px;
+    background-color: #111;
+    margin-bottom: 16px;
 }
 
+.controls,
+.speed-buttons,
+.color-buttons,
+.scoreboard,
 .menu {
-    padding : 5px;
-    text-align: center;
-    margin-top: 20px;
-    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
 }
 
+button,
+select,
 .save-input {
-    margin-right: 10px;
-    margin-bottom: 10px;
-    background-color: #555;
-    border: none;
-    color: #fff;
-    padding: 5px 10px;
-    font-size: 16px;
+    border-radius: 6px;
 }
 
 button {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: #555;
-    border: none;
+    background-color: #222;
+    border: 1px solid #444;
     color: #fff;
-    padding: 8px 16px;
+    padding: 10px 16px;
     font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.15s ease;
 }
 
 button:hover {
-    background-color: #777;
+    background-color: #444;
+    transform: translateY(-1px);
 }
 
+.save-input,
 select {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: #555;
-    border: none;
+    background-color: #222;
+    border: 1px solid #444;
     color: #fff;
-    padding: 8px 16px;
+    padding: 10px 12px;
     font-size: 16px;
 }
 
-option {
-    background-color: #555;
-    color: #fff;
-}
-
-option:hover {
-    background-color: #777;
+.menu {
+    padding: 12px;
+    text-align: center;
+    width: min(600px, 100%);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
 }
 
 .theme-switcher {
@@ -79,14 +88,18 @@ option:hover {
 }
 
 .theme-switcher input[type="radio"] + label {
-    background-color: #555;
+    background-color: #222;
     color: #fff;
-    padding: 5px 10px;
+    padding: 8px 12px;
     cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid #444;
 }
 
 .theme-switcher input[type="radio"]:checked + label {
-    background-color: #777;
+    background-color: #fff;
+    color: #000;
+    border-color: #888;
 }
 
 .dark-theme {
@@ -95,10 +108,27 @@ option:hover {
 }
 
 .light-theme {
-    background-color: #fff;
-    color: #000;
+    background-color: #f5f5f5;
+    color: #111;
 }
 
 .light-theme canvas {
-    border-color: #000;
+    border-color: #111;
+}
+
+.light-theme button,
+.light-theme select,
+.light-theme .save-input {
+    background-color: #fff;
+    color: #111;
+    border-color: #ccc;
+}
+
+.scoreboard > div {
+    background: rgba(255,255,255,0.08);
+    padding: 10px 14px;
+    border-radius: 10px;
+    min-width: 120px;
+    text-align: center;
+    font-weight: bold;
 }
